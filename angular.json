@@ -25,9 +25,26 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+
+              "src/js/jquery-3.3.1.min.js",
+              "src/js/jquery-migrate-3.0.1.min.js",
+              "src/js/jquery-ui.js",
+              "src/js/popper.min.js",
+              "src/js/bootstrap.min.js",
+              "src/js/owl.carousel.min.js",
+              "src/js/mediaelement-and-player.min.js",
+              "src/js/jquery.stellar.min.js",
+              "src/js/jquery.countdown.min.js",
+              "src/js/jquery.magnific-popup.min.js",
+              "src/js/bootstrap-datepicker.min.js",
+              "src/js/aos.js"
+
+            ]
           },
           "configurations": {
             "production": {
@@ -87,6 +104,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -94,5 +112,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "e538c866-3f6d-4745-805e-51fc653f624d"
   }
 }
