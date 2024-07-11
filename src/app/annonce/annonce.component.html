@@ -1,0 +1,31 @@
+<div class="row mb-7">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="site-pagination">
+
+
+        <a (click)="previousOffset()" [ngClass]="{ disabled: currentPageIndex === 0 }"
+        >
+          Previous
+        </a>
+
+        <div *ngFor="let page of pages; let currentIndex = index">
+          <a
+
+            (click)="setCurrentPage(currentIndex)">
+            {{ pages[currentIndex] }}
+          </a>
+
+        </div>
+
+        <a (click)="nextOffset()" [ngClass]="{ disabled: currentPageIndex === pages?.length! - 1 }">
+          Next
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

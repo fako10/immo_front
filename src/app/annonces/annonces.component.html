@@ -1,0 +1,69 @@
+<div class="site-section site-section-sm bg-light">
+  <div class="container">
+    <div class="row mb-5">
+
+      <!-- device-list.component.html -->
+      <ng-container *ngIf="annonces?.length != 0; else noDevices">
+
+
+        <div *ngFor="let annonce of annonces" class="col-md-6 col-lg-4 mb-4">
+
+          <div class="property-entry h-100">
+            <a class="property-thumbnail" [routerLink]="['/annonceview/', annonce?.codeAnnonce]">
+              <div class="offer-type-wrap">
+                <span class="offer-type bg-success">{{ annonce.typeTransaction }}</span>
+
+              </div>
+              <img [src]="retrieveImage(annonce.photo)" alt="Image" class="img-fluid">
+            </a>
+            <div class="p-4 property-body">
+              <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+              <h2 class="property-title"><a href="property-details.html">{{ annonce.commune }}</a></h2>
+              <span class="property-location d-block mb-3"><span class="property-icon icon-room">
+
+              </span>{{ annonce.dateCreation }}</span>
+              <strong class="property-price text-primary mb-3 d-block text-success">{{ annonce.prix }}</strong>
+              <ul class="property-specs-wrap mb-3 mb-lg-0">
+                <li>
+                  <span class="property-specs">Beds</span>
+                  <span class="property-specs-number">{{ annonce.nbrChambre }} <sup>+</sup></span>
+
+                </li>
+                <li>
+                  <span class="property-specs">Baths</span>
+                  <span class="property-specs-number">2</span>
+
+                </li>
+                <li>
+                  <span class="property-specs">SQ FT</span>
+                  <span class="property-specs-number">7,000</span>
+
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <app-annonce [currentPageIndex]="currentPageIndex" [pageSize]="pageSize" [pages]="pages"
+                     (selectedItemChange)="onSelectedItemChange($event)"
+                     (changeCurrentIndex)="setCurrentPage($event)"></app-annonce>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
+<ng-template #noDevices>
+  <div class="mx-auto mt-8 text-center text-gray-500">
+    <p class="mb-4 text-xl ">No devices are matching.</p>
+    <div class="text-center">
+      <img src="../../../../../assets/images/NOTFOUND.png" alt="" class="mx-auto"/>
+    </div>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <a href="/client/devices"> add device</a>
+    </button>
+  </div>
+</ng-template>
