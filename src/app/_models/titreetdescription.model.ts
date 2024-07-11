@@ -1,4 +1,4 @@
-export class TitreetdescriptionModel {
+export class Titreetdescription1Model {
 
   titreFR?: string;
   titreNL?: string;

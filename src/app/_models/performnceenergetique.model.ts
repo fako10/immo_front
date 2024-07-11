@@ -1,4 +1,4 @@
-export class PerformnceenergetiqueModel {
+export class Performnceenergetique1Model {
 
   id?: number
   numeroReferenceCPEB?: string;

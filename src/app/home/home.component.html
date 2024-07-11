@@ -13,48 +13,70 @@
     <div class="site-section site-section-sm pb-0">
       <div class="container">
         <div class="row">
-          <form class="form-search col-md-12" >
-            <div class="row  align-items-end">
-              <div class="col-md-3">
-                <label for="list-types">Listing Types {{"login" | translate }} </label>
+          <form class="form-search col-md-12"  name="form"  #f="ngForm" [formGroup]="multistep"
+                (ngSubmit)="f.form.valid && submit()" novalidate>
+
+
+
+            <div class="row  align-items-end" formGroupName="search">
+              <div class="col-md-2">
+                <label for="typetransaction">Type de transaction</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select name="list-types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="">Condo</option>
-                    <option value="">Commercial Building</option>
-                    <option value="">Land Property</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <label for="offer-types">Offer Type</label>
-                <div class="select-wrap">
-                  <span class="icon icon-arrow_drop_down"></span>
-                  <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                    <option value="">For Sale</option>
-                    <option value="">For Rent</option>
-                    <option value="">For Lease</option>
+                  <select class="form-control" formControlName="typeTransaction" id = "typetransaction">
+                    <option *ngFor="let typeTransaction of typesTransactions | keyvalue"
+                            [value]="typeTransaction.value" >
+                      {{typeTransaction.value}}
+                    </option>
                   </select>
                 </div>
               </div>
 
-              <div class="col-md-3">
-                <label for="select-city">Select City</label>
+              <div class="col-md-2">
+                <label for="typeBien">Type de bien </label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                    <option value="">New York</option>
-                    <option value="">Brooklyn</option>
-                    <option value="">London</option>
-                    <option value="">Japan</option>
-                    <option value="">Philippines</option>
+                  <select class="form-control" formControlName="typeBien" id = "typeBien" >
+                    <option *ngFor="let fileType of typesHabitations | keyvalue"
+                            [value]="fileType.value" >
+                      {{fileType.value}}
+                    </option>
+
                   </select>
                 </div>
               </div>
+
+
               <div class="col-md-3">
-                <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
+                <label for="codePostal">Ville ou code postal</label>
+                <div class="select-wrap">
+                  <span class="icon icon-arrow_drop_down"></span>
+                  <select class="form-control" formControlName="commune" id = "codePostal" >
+                    <option *ngFor="let fileType of strAdresses"
+                            [value]="fileType.codepostal" >
+                      {{fileType.codepostal?.toString() + ' ' + fileType.communeFR?.toString()}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <label for="prixmaximum">prix maximum </label>
+                <div class="select-wrap">
+                  <span class="icon icon-arrow_drop_down"></span>
+                  <input type="number" class="form-control" formControlName="prixMaximum" id="prixmaximum" onlyNumber>
+                </div>
+              </div>
+
+
+
+              <div class="col-md-3">
+                <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search" ng>
               </div>
             </div>
+
+
+
           </form>
     </div>
         <div class="row">

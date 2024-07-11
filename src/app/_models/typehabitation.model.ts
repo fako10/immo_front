@@ -3,8 +3,11 @@ export enum Typehabitation {
   Appartement = "Appartement",
   Terrain = "Terrain",
   Garage = "Garage",
-  Chambre = "Chambre",
-  Studio = "Studio",
+  Bureau = "Bureau",
+  Industrie = "Industrie",
+  Commerce = "Commerce",
+  //Chambre = "Chambre",
+  //Studio = "Studio",
 
 }
 
@@ -14,6 +17,9 @@ export const TypehabitationLabelMapping: Record<Typehabitation, string> = {
   [Typehabitation.Appartement]: "Appartement",
   [Typehabitation.Terrain]: "Terrain",
   [Typehabitation.Garage]: "Garage",
-  [Typehabitation.Chambre]: "Chambre",
-  [Typehabitation.Studio]: "Studio"
+  [Typehabitation.Bureau]: "Bureau",
+  [Typehabitation.Industrie]: "Industrie",
+  [Typehabitation.Commerce]: "Commerce",
+  //[Typehabitation.Chambre]: "Chambre",
+  //[Typehabitation.Studio]: "Studio"
 };

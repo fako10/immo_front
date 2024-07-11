@@ -1,4 +1,4 @@
-export class InterieurModel {
+export class Interieur1Model {
 
   nbrChambre?: number;
   nbrPieces?: number;

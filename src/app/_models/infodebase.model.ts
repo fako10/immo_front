@@ -1,4 +1,4 @@
-export class InfodebaseModel {
+export class Infodebase1Model {
 
 
   typeTransaction?: string;

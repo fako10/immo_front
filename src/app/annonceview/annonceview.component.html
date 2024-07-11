@@ -1,25 +1,55 @@
 
-
-
 <div class="site-section site-section-sm">
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
         <div>
-          <div class="slide-one-item home-slider  ">
-            <div><img src="assets/images/hero_bg_3.jpg" alt="Image" class="img-fluid"></div>
+
+
+
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+
+                <div *ngFor="let file of annonce?.photos" [ngClass]="[file.position === 0 ? 'carousel-item active': 'carousel-item']" >
+                  <img [src]="retrieveImage(file)" class="d-block w-100" alt="Image">
+                </div>
+
+
+
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
+
+
+
+
+
+
+
         </div>
         <div class="bg-white property-body border-bottom border-left border-right">
           <div class="row mb-5">
             <div class="col-md-6">
-              <strong class="text-success h1 mb-3">$1,000,500</strong>
+              <strong class="text-success h1 mb-3">{{annonce?.prix?.prixVente}}</strong>
             </div>
             <div class="col-md-6">
               <ul class="property-specs-wrap mb-3 mb-lg-0  float-lg-right">
                 <li>
-                  <span class="property-specs">Beds</span>
-                  <span class="property-specs-number">2 <sup>+</sup></span>
+                  <span class="property-specs">Beds </span>
+                  <span class="property-specs-number">{{annonce?.interieur?.nombrechambre}} <sup>+</sup></span>
 
                 </li>
                 <li>
@@ -46,7 +76,7 @@
             </div>
             <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
               <span class="d-inline-block text-black mb-0 caption-text">Price/Sqft</span>
-              <strong class="d-block">$520</strong>
+              <strong class="d-block">{{annonce?.prix?.prixVente}} Euro</strong>
             </div>
           </div>
           <h2 class="h4 text-black ">More Info</h2>

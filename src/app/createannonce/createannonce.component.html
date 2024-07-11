@@ -1,87 +1,344 @@
 <div class="site-section site-section ">
   <div class="container">
     <div class="row">
-
       <div class="col-md-12 col-lg-8 mb-5 ">
+        {{submitted}}
         <form (ngSubmit)="submit()" [formGroup]="multistep" class="form-search col-md-12">
           <div *ngIf="step == 1" formGroupName="infobase">
             <h4>Information de Base</h4>
             <div class="form-group">
-              <label for="typetransaction">Type de transaction</label>
+              <label for="typetransaction">Type de Transaction</label>
               <select class="form-control" formControlName="typeTransaction" id = "typetransaction">
-                <option *ngFor="let fileType of typesHabitations | keyvalue"
-                        [value]="fileType.value" >
-                 {{fileType.value}}
+                <option *ngFor="let typeTransaction of typesTransactions | keyvalue"
+                        [value]="typeTransaction.value" >
+                 {{typeTransaction.value}}
                 </option>
               </select>
-              <span class="text-danger" *ngIf="submitted && userDetails.typeTransaction.errors?.['required']">Please enter your first name</span>
+              <span class="text-danger" *ngIf="submitted && infobase.typeTransaction.errors?.['required']">Please enter your first name</span>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Type de bien</label>
-              <input type="text" class="form-control" formControlName="lname" id="exampleInputPassword1" placeholder="Last Name">
-            </div>
-          </div>
-          <div *ngIf="step == 2" formGroupName="contactDetails">
-
-            <h4>Contact Details</h4>
-            <div class="form-group">
-              <label for="exampleInputEmail10">Email</label>
-              <input type="text" class="form-control" formControlName="email"  id="exampleInputEmail10" aria-describedby="emailHelp"
-                     placeholder="Email">
-              <span class="text-danger" *ngIf="submitted && contactDetails.boite.errors?.['required']">Please enter your email</span>
-
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Contact Number</label>
-              <input type="text" class="form-control" formControlName="contactNumber" id="exampleInputPassword100" placeholder="Contact Number" name="contact">
-
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Address</label>
-              <textarea class="form-control" formControlName="address" id="exampleInputPassword" placeholder="Address"></textarea>
-
-            </div>
-          </div>
-          <div *ngIf="step == 3" formGroupName="personalDetails">
-            <h4>Personal Details</h4>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Gender</label>
-              <select class="form-control" formControlName="gender">
-                <option value="null">Select Ony One</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+              <label for="typeBien">Type de bien</label>
+              <select class="form-control" formControlName="typeBien" id = "typeBien" (change)="onChangeTypeBien($event)">
+                <option *ngFor="let fileType of typesHabitations | keyvalue"
+                        [value]="fileType.value" >
+                  {{fileType.value}}
+                </option>
 
               </select>
             </div>
-            <div class="form-group">
 
-              <div class="form-check form-check-inline">
-                Education
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="education" id="inlineRadio1" value="SSC">
-                <label class="form-check-label" for="inlineRadio1">SSC</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="education" id="inlineRadio2" value="HSC">
-                <label class="form-check-label" for="inlineRadio2">HSC</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="education" id="inlineRadio3" value="Graduate">
-                <label class="form-check-label" for="inlineRadio3">Graduate</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="education" id="inlineRadio4" value="Post Graduate">
-                <label class="form-check-label" for="inlineRadio3">Post Graduate</label>
-              </div>
+            <div class="form-group" *ngIf="infobase.typeBien.value != null ">
+              <label for="soustypeBien">Sous Type de bien</label>
+              <select class="form-control" formControlName="soustypeBien" id = "soustypeBien"
+                       >
+                <option *ngFor="let fileType of sousTypehabitations"
+                        [value]="fileType" >
+                  {{fileType}}
+                </option>
+              </select>
+            </div>
+
+
+          </div>
+          <div *ngIf="step == 2" formGroupName="adresse">
+
+            <h4>Adresse</h4>
+            <div class="form-group">
+              <label for="exampleInputEmail10">pays</label>
+              <input type="text" class="form-control" formControlName="pays"  id="exampleInputEmail10" aria-describedby="emailHelp"
+                     readonly >
+
+            </div>
+            <div class="form-group">
+              <label >Code postal</label>
+              <select class="form-control" formControlName="ville" id = "codePostal" (change)="onChangeCodePostal($event)">
+                <option *ngFor="let fileType of strAdresses"
+                        [value]="fileType.codepostal" >
+                  {{fileType.codepostal?.toString() + ' ' + fileType.communeFR?.toString()}}
+                </option>
+              </select>
+
+            </div>
+
+
+            <div class="form-group" *ngIf="adresseDetails.ville.value != null">
+              <label for="rue">rue</label>
+              <select class="form-control" formControlName="ville" id = "rue">
+                <option *ngFor="let item of filteredAdresses"
+                        [value]="item.rueFr" >
+                  {{item.rueFr}}
+                </option>
+              </select>
+
+            </div>
+
+            <div class="form-group" *ngIf="adresseDetails.ville.value != null">
+              <label for="numeroRue">Numéro</label>
+              <input type="text" class="form-control" formControlName="rue" id="numeroRue" placeholder="numero">
+
+            </div>
+
+            <div class="form-group" *ngIf="adresseDetails.ville.value != null">
+              <label for="boiteMaison">Boîte</label>
+              <input type="text" class="form-control" formControlName="rue" id="boiteMaison" placeholder="numero">
 
             </div>
 
           </div>
+          <div *ngIf="step == 3" formGroupName="prix">
+            <h4>Prix</h4>
+            <div class="form-group">
+              <label for="prixdemande">prix demandé</label>
+              <input type="number" class="form-control" formControlName="prixVente" id="prixdemande" onlyNumber>
+              <span class="text-danger" *ngIf="submitted && prix.prixVente.errors?.['required']">Entrez une valeur numérique</span>
+
+            </div>
+
+            <div class="form-group">
+              <label for="prixMetreCarre">prix Au m²(optionnel)</label>
+              <input type="number" class="form-control" formControlName="prixMetreCarre" id="prixMetreCarre" onlyNumber="true">
+              <span class="text-danger" *ngIf="submitted && prix.prixMetreCarre.hasError('pattern') ">Entrez une valeur numérique</span>
+            </div>
+
+            <div class="form-group" *ngIf="infobase.typeTransaction.value != 'Vendre'">
+              <label for="chargesmensuelles">Charges mensuelles</label>
+              <input type="number" class="form-control" formControlName="charges" id="chargesmensuelles" onlyNumber>
+              <span class="text-danger" *ngIf="submitted && prix.charges.hasError('min')">Entrez une valeur numérique</span>
+            </div>
+
+            <div class="form-group"  *ngIf="infobase.typeTransaction.value == 'Vendre'">
+              <label for="revenucadastral">Revenu cadastral (Optionnel)</label>
+              <input type="number" class="form-control" formControlName="revenuCadastr" id="revenucadastral" onlyNumber>
+              <span class="text-danger" *ngIf="submitted && prix.revenuCadastre.hasError('pattern')">Entrez une valeur numérique</span>
+            </div>
+
+          </div>
+
+          <div *ngIf="step == 4" formGroupName="infogenerale">
+            <h4>Information générale</h4>
+            <div class="form-group">
+              <label for="nombrefacade">Nombre de façade</label>
+              <input type="text" class="form-control" formControlName="nombrefacade" id="nombrefacade" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="largeurfacade">Largeur façade</label>
+              <input type="text" class="form-control" formControlName="largeurfacade" id="largeurfacade" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="surfacetotale">Surface Terrain</label>
+              <input type="text" class="form-control" formControlName="surfacetotale" id="surfacetotale" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="surfacehabitable">Surface habitable</label>
+              <input type="text" class="form-control" formControlName="surfacetotale" id="surfacehabitable" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="nombreetage">Nombre d'étage</label>
+              <input type="text" class="form-control" formControlName="nombreetage" id="nombreetage" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="anneeconstruction">Année de construction</label>
+              <input type="text" class="form-control" formControlName="anneeconstruction" id="anneeconstruction" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="etatBatiment">état du bâtiment</label>
+              <select class="form-control" formControlName="etatBatiment" id = "etatBatiment" >
+                <option *ngFor="let fileType of typesHabitations | keyvalue"
+                        [value]="fileType.value" >
+                  {{fileType.value}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="parking">parking</label>
+              <input type="checkbox" class="form-control" formControlName="parking" id="parking" >
+            </div>
+
+            <div class="form-group" *ngIf="infoGenerale.parking.value">
+              <label for="nombreplaceparking">Nombre de place parking</label>
+              <input type="text" class="form-control" formControlName="nombreplaceparking" id="nombreplaceparking" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="ascenseur">Ascenceur</label>
+              <input type="checkbox" class="form-control" formControlName="ascenseur" id="ascenseur" >
+            </div>
+
+            <div class="form-group">
+              <label for="acceshandicape">Accés Handicapé</label>
+              <input type="checkbox" class="form-control" formControlName="acceshandicape" id="acceshandicape" >
+            </div>
+
+
+          </div>
+
+
+          <div *ngIf="step == 5" formGroupName="interieur">
+            <h4>Intérieur</h4>
+            <div class="form-group">
+              <label for="nombrechambre">Nombre de chambre</label>
+              <input type="text" class="form-control" formControlName="nombrechambre" id="nombrechambre" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="nombrePiece">Nombre de piéces</label>
+              <input type="text" class="form-control" formControlName="nombrechambre" id="nombrePiece" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="nombreSalleBain">Nombre de salles de bains</label>
+              <input type="text" class="form-control" formControlName="nombreSalleBain" id="nombreSalleBain" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="nombreToilette">Nombre de Toilettes</label>
+              <input type="text" class="form-control" formControlName="nombreToilette" id="nombreToilette" onlyNumber>
+            </div>
+
+          </div>
+
+          <div *ngIf="step == 6" formGroupName="exterieur">
+            <h4>Extérieur</h4>
+            <div class="form-group">
+              <label for="jardin">Jardin</label>
+              <input type="checkbox" class="form-control" formControlName="jardin" id="jardin" >
+            </div>
+
+            <div class="form-group" *ngIf="exterieur.jardin.value">
+              <label for="superficieJardin">Superficie Jardin</label>
+              <input type="text" class="form-control" formControlName="superficieJardin" id="superficieJardin" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="piscine">Piscine</label>
+              <input type="checkbox" class="form-control" formControlName="piscine" id="piscine" >
+            </div>
+
+            <div class="form-group" *ngIf="exterieur.piscine.value">
+              <label for="superficiePiscine">Superficie Piscine</label>
+              <input type="text" class="form-control" formControlName="superficiePiscine" id="superficiePiscine" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="piscine">Terrasse</label>
+              <input type="checkbox" class="form-control" formControlName="terrasse" id="terrasse" >
+            </div>
+
+            <div class="form-group" *ngIf="exterieur.terrasse.value">
+              <label for="superficieTerrasse">Superficie Terrasse</label>
+              <input type="text" class="form-control" formControlName="superficieTerrasse" id="superficieTerrasse" onlyNumber>
+            </div>
+
+            <div class="form-group">
+              <label for="vueSurMer">Vue sur Mer</label>
+              <input type="checkbox" class="form-control" formControlName="vueSurMer" id="vueSurMer" >
+            </div>
+
+          </div>
+
+          <div *ngIf="step == 7" formGroupName="titreetdescription">
+            <h4>Titre et description</h4>
+            <div class="form-group">
+              <label for="titreFr">Titre français</label>
+              <input type="text" class="form-control" formControlName="titreFr" id="titreFr" >
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionFr">Description français</label>
+              <input type="textarea" class="form-control" formControlName="descriptionFr" id="descriptionFr" >
+            </div>
+
+            <div class="form-group">
+              <label for="titreNl">Titre en neerlandais</label>
+              <input type="text" class="form-control" formControlName="titreNl" id="titreNl" >
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionNl">Description en neerlandais</label>
+              <input type="textarea" class="form-control" formControlName="descriptionNl" id="descriptionNl" >
+            </div>
+
+
+            <div class="form-group">
+              <label for="titreEn">Titre en anglais</label>
+              <input type="text" class="form-control" formControlName="titreEn" id="titreEn" >
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionEn">Description en anglais</label>
+              <input type="textarea" class="form-control" formControlName="descriptionEn" id="descriptionEn" >
+            </div>
+
+          </div>
+
+
+          <div *ngIf="step == 8" formGroupName="certificationpeb">
+            <h4>certification PEB</h4>
+
+            <div class="form-group">
+              <label for="classeEnergetique">Classe énergétique</label>
+              <input type="text" class="form-control" formControlName="classeEnergetique" id="classeEnergetique" >
+            </div>
+
+            <div class="form-group">
+              <label for="numeroReferenceCPEB">Numéro reference PEB</label>
+              <input type="text" class="form-control" formControlName="numeroReferenceCPEB" id="numeroReferenceCPEB" >
+            </div>
+
+            <div class="form-group">
+              <label for="consommationPEB">Consommation PEB</label>
+              <input type="text" class="form-control" formControlName="consommationPEB" id="consommationPEB" >
+            </div>
+
+            <div class="form-group">
+              <label for="emissionPEB">emission PEB</label>
+              <input type="text" class="form-control" formControlName="emissionPEB" id="emissionPEB" >
+            </div>
+
+
+            <div class="form-group">
+              <label for="descriptionPebFR">Description en anglais</label>
+              <input type="textarea" class="form-control" formControlName="descriptionPebFR" id="descriptionPebFR" >
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionPebNL">Description en anglais</label>
+              <input type="textarea" class="form-control" formControlName="descriptionPebNL" id="descriptionPebNL" >
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionPebEN">Description en anglais</label>
+              <input type="textarea" class="form-control" formControlName="descriptionPebEN" id="descriptionPebEN" >
+            </div>
+
+          </div>
+
+          <div *ngIf="step == 9" formGroupName="photos">
+            <div class="form-group col-4">
+              <label for="photos">photos </label>
+              <input
+                type="file"
+                name="photos"
+                id="photos"
+                (change)="onFileChanged($event)"
+                multiple
+                accept="image/*">
+
+            </div>
+
+          </div>
+
+
           <a class="btn btn-primary mx-2" *ngIf="step != 1" (click)="previous()">Previous</a>
-          <button type="submit" class="btn btn-info mx-2" *ngIf="step != 3">Next</button>
-          <button type="submit" class="btn btn-primary mx-2" *ngIf="step == 3">Submit</button>
+          <button type="submit" class="btn btn-info mx-2" *ngIf="step != 9">Next</button>
+          <button type="submit" class="btn btn-primary mx-2" *ngIf="step == 9">Submit</button>
           <br>
           <pre>{{multistep.value | json}}</pre>
         </form>
@@ -91,19 +348,10 @@
 </div>
 
 
-<div class="sidebar-step">
-  <div class="number"> </div>
-  <div  >
-    <small>STEP </small>
-    <span>caption</span>
-  </div>
-</div>
 
 
 
-<div class="col-12 col-md-6 col-lg-4" data-parent-id="House" style="" data-real-property-type="House" data-url-match="maison"><input id="House" name="PrivateWizardStep1.PropertySubType" type="radio" value="House" aria-describedby="PrivateWizardStep1.PropertySubType-error" class=""> <label for="House" data-pronoun="ma"> <i class="fas fa-check fs-4"></i><span class="d-inline-block sub-type-text">Maison</span> </label></div>
 
 
-<div class = "prop-types-item selected" tabindex="0" data-property-type="House" data-url-match="House" data-original-title ="" title ="">
-  <i class = "fas fa-check fs-4"> ::before </i>
-  <div> <img src = "/images.png"></div> <span>maison></span> </div>
+
+

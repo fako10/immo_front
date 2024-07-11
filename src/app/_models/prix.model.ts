@@ -1,4 +1,4 @@
-export class PrixModel {
+export class Prix1Model {
 
   prixVente?: number;
   revenuCadastr?: number;

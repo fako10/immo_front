@@ -1,4 +1,4 @@
-export class ExterieurModel {
+export class Exterieur1Model {
 
   id?: number;
   idAnnonce?: number;

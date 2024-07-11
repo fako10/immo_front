@@ -1,4 +1,4 @@
-export  class InfodetailleModel {
+export  class Infodetaille1Model {
 
   nbrFacade?: number;
   largeurFacade?: number;
