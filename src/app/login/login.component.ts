@@ -101,4 +101,43 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
 
+  onSubmit(): void {
+    const {username, password} = this.form;
+    this.authService.login(username, password).subscribe(
+      data => {
+        this.isLocked = data.locked;
+        if (this.isLocked) {
+          console.log(data);
+          this.authService.savePassword(password);
+          this.router.navigateByUrl(`emailvalidation/${username}`)
+        } else {
+          console.log(data);
+          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveUser(data);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.roles = this.tokenStorage.getUser().roles;
+          const certification =  window.sessionStorage.getItem('current_certification');
+          if(certification != null) {
+            const id = window.sessionStorage.getItem('idcertification');
+            window.sessionStorage.removeItem('current_certification');
+            window.sessionStorage.removeItem('idcertification');
+            this.router.navigateByUrl(`checkout/${id}`);
+          } else {
+            window.sessionStorage.removeItem('current_certification');
+            window.sessionStorage.removeItem('idcertification');
+            this.reloadPage();
+          }
+
+        }
+
+      },
+      err => {
+        this.errorMessage = 'login or password incorrect';
+        this.isLoginFailed = true;
+
+      }
+    );
+  }
+
 }
