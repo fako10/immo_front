@@ -1,40 +1,14 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark" style="background-color: #e3f2fd;">
+  <nav class="navbar navbar-expand navbar-dark bg-primary">
 
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Home </a>
       </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="PMPnavbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          PMP
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink="capm">CAPM </a>
-          <a class="dropdown-item" routerLink="pmptest">PMP</a>
-        </div>
-      </li>
 
 
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="SCRUMnavbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          SCRUM
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink="psm1">PSM I </a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="ITILnavbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ITIL
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink="itilfoundation" >ITIL Foundation </a>
-        </div>
-      </li>
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="MorenavbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -46,13 +20,8 @@
         </div>
       </li>
 
-
       <li class="nav-item">
-        <a href="/certificationList" class="nav-link" >My Certifications</a>
-      </li>
-
-      <li class="nav-item">
-        <a href="/user" class="nav-link"  routerLink="user">User</a>
+        <a href="/createannonce" class="nav-link"  routerLink="createannonce">publier une annonce</a>
       </li>
     </ul>
 
@@ -69,7 +38,7 @@
 
   </nav>
 
-  
+
   <div >
 
     <router-outlet></router-outlet>

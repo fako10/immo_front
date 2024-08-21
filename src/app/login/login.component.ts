@@ -3,7 +3,6 @@ import {Router} from "@angular/router";
 import {AuthService} from "../_services/auth.service";
 import {Subject} from "rxjs";
 import {TokenStorageService} from "../_services/tokenstorage.service";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
     email: ''
   };
 
-  private modalService = inject(NgbModal);
+
   isLoggedIn = false;
   isPasswdChangeSucceed = false;
   isPasswdChangeFail = false;
@@ -56,27 +55,9 @@ export class LoginComponent implements OnInit {
 
   }
 
-  open(content: TemplateRef<any>) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
-  }
 
-  private getDismissReason(reason: any): string {
-    switch (reason) {
-      case ModalDismissReasons.ESC:
-        return 'by pressing ESC';
-      case ModalDismissReasons.BACKDROP_CLICK:
-        return 'by clicking on a backdrop';
-      default:
-        return `with: ${reason}`;
-    }
-  }
+
+
 
   submitForm(form: any): void {
 

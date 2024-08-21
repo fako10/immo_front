@@ -22,6 +22,7 @@ import { AnnonceComponent } from './annonce/annonce.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ForgotpassComponent } from './forgotpass/forgotpass.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RegisterComponent } from './register/register.component';
     AnnonceComponent,
     BoardUserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgotpassComponent
   ],
   imports: [
     BrowserModule,

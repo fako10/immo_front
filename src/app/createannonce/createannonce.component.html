@@ -1,27 +1,29 @@
-<div class="site-section site-section ">
+<div class="site-section site-wrap">
   <div class="container">
+    étape {{step}} sur 9
     <div class="row">
       <div class="col-md-12 col-lg-8 mb-5 ">
-        {{submitted}}
         <form (ngSubmit)="submit()" [formGroup]="multistep" class="form-search col-md-12">
+
+          <div class="input--toggle__label"> louer</div>
           <div *ngIf="step == 1" formGroupName="infobase">
             <h4>Information de Base</h4>
             <div class="form-group">
               <label for="typetransaction">Type de Transaction</label>
-              <select class="form-control" formControlName="typeTransaction" id = "typetransaction">
+              <select class="form-control" formControlName="typeTransaction" id="typetransaction">
                 <option *ngFor="let typeTransaction of typesTransactions | keyvalue"
-                        [value]="typeTransaction.value" >
-                 {{typeTransaction.value}}
+                        [value]="typeTransaction.value">
+                  {{ typeTransaction.value }}
                 </option>
               </select>
               <span class="text-danger" *ngIf="submitted && infobase.typeTransaction.errors?.['required']">Please enter your first name</span>
             </div>
             <div class="form-group">
               <label for="typeBien">Type de bien</label>
-              <select class="form-control" formControlName="typeBien" id = "typeBien" (change)="onChangeTypeBien($event)">
+              <select class="form-control" formControlName="typeBien" id="typeBien" (change)="onChangeTypeBien($event)">
                 <option *ngFor="let fileType of typesHabitations | keyvalue"
-                        [value]="fileType.value" >
-                  {{fileType.value}}
+                        [value]="fileType.value">
+                  {{ fileType.value }}
                 </option>
 
               </select>
@@ -29,11 +31,11 @@
 
             <div class="form-group" *ngIf="infobase.typeBien.value != null ">
               <label for="soustypeBien">Sous Type de bien</label>
-              <select class="form-control" formControlName="soustypeBien" id = "soustypeBien"
-                       >
+              <select class="form-control" formControlName="soustypeBien" id="soustypeBien"
+              >
                 <option *ngFor="let fileType of sousTypehabitations"
-                        [value]="fileType" >
-                  {{fileType}}
+                        [value]="fileType">
+                  {{ fileType }}
                 </option>
               </select>
             </div>
@@ -45,16 +47,18 @@
             <h4>Adresse</h4>
             <div class="form-group">
               <label for="exampleInputEmail10">pays</label>
-              <input type="text" class="form-control" formControlName="pays"  id="exampleInputEmail10" aria-describedby="emailHelp"
-                     readonly >
+              <input type="text" class="form-control" formControlName="pays" id="exampleInputEmail10"
+                     aria-describedby="emailHelp"
+                     readonly>
 
             </div>
             <div class="form-group">
-              <label >Code postal</label>
-              <select class="form-control" formControlName="ville" id = "codePostal" (change)="onChangeCodePostal($event)">
+              <label>Code postal</label>
+              <select class="form-control" formControlName="ville" id="codePostal"
+                      (change)="onChangeCodePostal($event)">
                 <option *ngFor="let fileType of strAdresses"
-                        [value]="fileType.codepostal" >
-                  {{fileType.codepostal?.toString() + ' ' + fileType.communeFR?.toString()}}
+                        [value]="fileType.codepostal">
+                  {{ fileType.codepostal?.toString() + ' ' + fileType.communeFR?.toString() }}
                 </option>
               </select>
 
@@ -63,10 +67,10 @@
 
             <div class="form-group" *ngIf="adresseDetails.ville.value != null">
               <label for="rue">rue</label>
-              <select class="form-control" formControlName="ville" id = "rue">
+              <select class="form-control" formControlName="ville" id="rue">
                 <option *ngFor="let item of filteredAdresses"
-                        [value]="item.rueFr" >
-                  {{item.rueFr}}
+                        [value]="item.rueFr">
+                  {{ item.rueFr }}
                 </option>
               </select>
 
@@ -96,17 +100,19 @@
 
             <div class="form-group">
               <label for="prixMetreCarre">prix Au m²(optionnel)</label>
-              <input type="number" class="form-control" formControlName="prixMetreCarre" id="prixMetreCarre" onlyNumber="true">
+              <input type="number" class="form-control" formControlName="prixMetreCarre" id="prixMetreCarre"
+                     onlyNumber="true">
               <span class="text-danger" *ngIf="submitted && prix.prixMetreCarre.hasError('pattern') ">Entrez une valeur numérique</span>
             </div>
 
             <div class="form-group" *ngIf="infobase.typeTransaction.value != 'Vendre'">
               <label for="chargesmensuelles">Charges mensuelles</label>
               <input type="number" class="form-control" formControlName="charges" id="chargesmensuelles" onlyNumber>
-              <span class="text-danger" *ngIf="submitted && prix.charges.hasError('min')">Entrez une valeur numérique</span>
+              <span class="text-danger"
+                    *ngIf="submitted && prix.charges.hasError('min')">Entrez une valeur numérique</span>
             </div>
 
-            <div class="form-group"  *ngIf="infobase.typeTransaction.value == 'Vendre'">
+            <div class="form-group" *ngIf="infobase.typeTransaction.value == 'Vendre'">
               <label for="revenucadastral">Revenu cadastral (Optionnel)</label>
               <input type="number" class="form-control" formControlName="revenuCadastr" id="revenucadastral" onlyNumber>
               <span class="text-danger" *ngIf="submitted && prix.revenuCadastre.hasError('pattern')">Entrez une valeur numérique</span>
@@ -143,37 +149,39 @@
 
             <div class="form-group">
               <label for="anneeconstruction">Année de construction</label>
-              <input type="text" class="form-control" formControlName="anneeconstruction" id="anneeconstruction" onlyNumber>
+              <input type="text" class="form-control" formControlName="anneeconstruction" id="anneeconstruction"
+                     onlyNumber>
             </div>
 
             <div class="form-group">
               <label for="etatBatiment">état du bâtiment</label>
-              <select class="form-control" formControlName="etatBatiment" id = "etatBatiment" >
+              <select class="form-control" formControlName="etatBatiment" id="etatBatiment">
                 <option *ngFor="let fileType of typesHabitations | keyvalue"
-                        [value]="fileType.value" >
-                  {{fileType.value}}
+                        [value]="fileType.value">
+                  {{ fileType.value }}
                 </option>
               </select>
             </div>
 
             <div class="form-group">
               <label for="parking">parking</label>
-              <input type="checkbox" class="form-control" formControlName="parking" id="parking" >
+              <input type="checkbox" class="form-control" formControlName="parking" id="parking">
             </div>
 
             <div class="form-group" *ngIf="infoGenerale.parking.value">
               <label for="nombreplaceparking">Nombre de place parking</label>
-              <input type="text" class="form-control" formControlName="nombreplaceparking" id="nombreplaceparking" onlyNumber>
+              <input type="text" class="form-control" formControlName="nombreplaceparking" id="nombreplaceparking"
+                     onlyNumber>
             </div>
 
             <div class="form-group">
               <label for="ascenseur">Ascenceur</label>
-              <input type="checkbox" class="form-control" formControlName="ascenseur" id="ascenseur" >
+              <input type="checkbox" class="form-control" formControlName="ascenseur" id="ascenseur">
             </div>
 
             <div class="form-group">
               <label for="acceshandicape">Accés Handicapé</label>
-              <input type="checkbox" class="form-control" formControlName="acceshandicape" id="acceshandicape" >
+              <input type="checkbox" class="form-control" formControlName="acceshandicape" id="acceshandicape">
             </div>
 
 
@@ -208,37 +216,40 @@
             <h4>Extérieur</h4>
             <div class="form-group">
               <label for="jardin">Jardin</label>
-              <input type="checkbox" class="form-control" formControlName="jardin" id="jardin" >
+              <input type="checkbox" class="form-control" formControlName="jardin" id="jardin">
             </div>
 
             <div class="form-group" *ngIf="exterieur.jardin.value">
               <label for="superficieJardin">Superficie Jardin</label>
-              <input type="text" class="form-control" formControlName="superficieJardin" id="superficieJardin" onlyNumber>
+              <input type="text" class="form-control" formControlName="superficieJardin" id="superficieJardin"
+                     onlyNumber>
             </div>
 
             <div class="form-group">
               <label for="piscine">Piscine</label>
-              <input type="checkbox" class="form-control" formControlName="piscine" id="piscine" >
+              <input type="checkbox" class="form-control" formControlName="piscine" id="piscine">
             </div>
 
             <div class="form-group" *ngIf="exterieur.piscine.value">
               <label for="superficiePiscine">Superficie Piscine</label>
-              <input type="text" class="form-control" formControlName="superficiePiscine" id="superficiePiscine" onlyNumber>
+              <input type="text" class="form-control" formControlName="superficiePiscine" id="superficiePiscine"
+                     onlyNumber>
             </div>
 
             <div class="form-group">
               <label for="piscine">Terrasse</label>
-              <input type="checkbox" class="form-control" formControlName="terrasse" id="terrasse" >
+              <input type="checkbox" class="form-control" formControlName="terrasse" id="terrasse">
             </div>
 
             <div class="form-group" *ngIf="exterieur.terrasse.value">
               <label for="superficieTerrasse">Superficie Terrasse</label>
-              <input type="text" class="form-control" formControlName="superficieTerrasse" id="superficieTerrasse" onlyNumber>
+              <input type="text" class="form-control" formControlName="superficieTerrasse" id="superficieTerrasse"
+                     onlyNumber>
             </div>
 
             <div class="form-group">
               <label for="vueSurMer">Vue sur Mer</label>
-              <input type="checkbox" class="form-control" formControlName="vueSurMer" id="vueSurMer" >
+              <input type="checkbox" class="form-control" formControlName="vueSurMer" id="vueSurMer">
             </div>
 
           </div>
@@ -247,33 +258,33 @@
             <h4>Titre et description</h4>
             <div class="form-group">
               <label for="titreFr">Titre français</label>
-              <input type="text" class="form-control" formControlName="titreFr" id="titreFr" >
+              <input type="text" class="form-control" formControlName="titreFr" id="titreFr">
             </div>
 
             <div class="form-group">
               <label for="descriptionFr">Description français</label>
-              <input type="textarea" class="form-control" formControlName="descriptionFr" id="descriptionFr" >
+              <input type="textarea" class="form-control" formControlName="descriptionFr" id="descriptionFr">
             </div>
 
             <div class="form-group">
               <label for="titreNl">Titre en neerlandais</label>
-              <input type="text" class="form-control" formControlName="titreNl" id="titreNl" >
+              <input type="text" class="form-control" formControlName="titreNl" id="titreNl">
             </div>
 
             <div class="form-group">
               <label for="descriptionNl">Description en neerlandais</label>
-              <input type="textarea" class="form-control" formControlName="descriptionNl" id="descriptionNl" >
+              <input type="textarea" class="form-control" formControlName="descriptionNl" id="descriptionNl">
             </div>
 
 
             <div class="form-group">
               <label for="titreEn">Titre en anglais</label>
-              <input type="text" class="form-control" formControlName="titreEn" id="titreEn" >
+              <input type="text" class="form-control" formControlName="titreEn" id="titreEn">
             </div>
 
             <div class="form-group">
               <label for="descriptionEn">Description en anglais</label>
-              <input type="textarea" class="form-control" formControlName="descriptionEn" id="descriptionEn" >
+              <input type="textarea" class="form-control" formControlName="descriptionEn" id="descriptionEn">
             </div>
 
           </div>
@@ -284,38 +295,38 @@
 
             <div class="form-group">
               <label for="classeEnergetique">Classe énergétique</label>
-              <input type="text" class="form-control" formControlName="classeEnergetique" id="classeEnergetique" >
+              <input type="text" class="form-control" formControlName="classeEnergetique" id="classeEnergetique">
             </div>
 
             <div class="form-group">
               <label for="numeroReferenceCPEB">Numéro reference PEB</label>
-              <input type="text" class="form-control" formControlName="numeroReferenceCPEB" id="numeroReferenceCPEB" >
+              <input type="text" class="form-control" formControlName="numeroReferenceCPEB" id="numeroReferenceCPEB">
             </div>
 
             <div class="form-group">
               <label for="consommationPEB">Consommation PEB</label>
-              <input type="text" class="form-control" formControlName="consommationPEB" id="consommationPEB" >
+              <input type="text" class="form-control" formControlName="consommationPEB" id="consommationPEB">
             </div>
 
             <div class="form-group">
               <label for="emissionPEB">emission PEB</label>
-              <input type="text" class="form-control" formControlName="emissionPEB" id="emissionPEB" >
+              <input type="text" class="form-control" formControlName="emissionPEB" id="emissionPEB">
             </div>
 
 
             <div class="form-group">
               <label for="descriptionPebFR">Description en anglais</label>
-              <input type="textarea" class="form-control" formControlName="descriptionPebFR" id="descriptionPebFR" >
+              <input type="textarea" class="form-control" formControlName="descriptionPebFR" id="descriptionPebFR">
             </div>
 
             <div class="form-group">
               <label for="descriptionPebNL">Description en anglais</label>
-              <input type="textarea" class="form-control" formControlName="descriptionPebNL" id="descriptionPebNL" >
+              <input type="textarea" class="form-control" formControlName="descriptionPebNL" id="descriptionPebNL">
             </div>
 
             <div class="form-group">
               <label for="descriptionPebEN">Description en anglais</label>
-              <input type="textarea" class="form-control" formControlName="descriptionPebEN" id="descriptionPebEN" >
+              <input type="textarea" class="form-control" formControlName="descriptionPebEN" id="descriptionPebEN">
             </div>
 
           </div>
@@ -340,7 +351,7 @@
           <button type="submit" class="btn btn-info mx-2" *ngIf="step != 9">Next</button>
           <button type="submit" class="btn btn-primary mx-2" *ngIf="step == 9">Submit</button>
           <br>
-          <pre>{{multistep.value | json}}</pre>
+
         </form>
       </div>
     </div>
